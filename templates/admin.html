@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h2>Admin – Payment Verification</h2>
+
+<table border="1" cellpadding="10">
+<tr>
+    <th>Student Name</th>
+    <th>Roll</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for payment in payments %}
+<tr>
+    <td>{{ payment.student.name }}</td>
+    <td>{{ payment.student.roll }}</td>
+    <td>₹{{ payment.amount }}</td>
+    <td>{{ payment.status | upper }}</td>
+    <td>
+        {% if payment.status == "pending" %}
+            <a href="/verify_payment/{{ payment.id }}">Verify</a>
+        {% else %}
+            ✔ Verified
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>

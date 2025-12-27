@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Success</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Payment Successful 🎉</h1>
+        <p>Thank you, {{ student.name }}</p>
+    </div>
+
+    <div class="card">
+        <p style="text-align:center;color:#22c55e;font-size:18px;">
+            Your fee payment has been completed successfully.
+        </p>
+        <br>
+        <a href="/dashboard/{{ student.roll }}">
+            <button>Back to Dashboard</button>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

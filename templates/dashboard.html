@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Hello, {{ student.name }}</h1>
+        <p>College Fee Dashboard</p>
+    </div>
+
+    <div class="card">
+        <p style="text-align:center;color:#9ca3af;">Amount Due</p>
+        <div class="amount">₹{{ student.due_amount }}</div>
+
+        {% if student.due_amount > 0 %}
+            <button id="payBtn">Pay Now</button>
+        {% else %}
+            <button class="secondary">Fees Paid Successfully ✅</button>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <h3>Payment History</h3>
+        <ul class="history">
+        {% for p in payments %}
+            <li>
+                <span>₹{{ p.amount }}</span>
+                <span>{{ p.status }}</span>
+            </li>
+        {% else %}
+            <li>No transactions</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<!-- Razorpay checkout -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+const payBtn = document.getElementById("payBtn");
+
+if (payBtn) {
+    payBtn.addEventListener("click", async () => {
+
+        const res = await fetch("/create_order/{{ student.roll }}");
+        const data = await res.json();
+
+        const options = {
+            key: "{{ razorpay_key }}",
+            amount: data.amount,
+            currency: "INR",
+            order_id: data.order_id,
+            name: "College Fee Payment",
+            description: "Semester Fees",
+
+            handler: function (response) {
+                // REAL success (if user completes test payment)
+                fetch("/payment_success", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+                    body:
+                        "razorpay_payment_id=" + response.razorpay_payment_id +
+                        "&razorpay_order_id=" + response.razorpay_order_id +
+                        "&razorpay_signature=" + response.razorpay_signature
+                }).then(() => window.location.reload());
+            },
+
+            modal: {
+                ondismiss: function () {
+                    // 👇 FAKE SUCCESS WHEN USER CLOSES PAYMENT
+                    fetch("/fake_payment_success/" + data.order_id)
+                        .then(() => {
+                            alert("Payment successful (Simulated for Demo)");
+                            window.location.reload();
+                        });
+                }
+            }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+    });
+}
+</script>
+
+
+</body>
+</html>
