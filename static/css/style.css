@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    min-height: 100vh;
+    color: #e5e7eb;
+}
+
+/* Center container */
+.container {
+    max-width: 420px;
+    margin: 80px auto;
+    background: #111827;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.header p {
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+/* Card */
+.card {
+    background: #1f2937;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 18px;
+}
+
+/* Amount */
+.amount {
+    font-size: 28px;
+    font-weight: bold;
+    color: #22c55e;
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border: none;
+    border-radius: 12px;
+    color: #022c22;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(34,197,94,0.3);
+}
+
+button.secondary {
+    background: #374151;
+    color: #e5e7eb;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    border-radius: 10px;
+    border: 1px solid #374151;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 15px;
+}
+
+/* History */
+.history {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.history li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #374151;
+    font-size: 14px;
+}
+
+.success {
+    color: #22c55e;
+}
+
+.pending {
+    color: #facc15;
+}
+
+/* Footer text */
+.footer {
+    text-align: center;
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 10px;
+}
